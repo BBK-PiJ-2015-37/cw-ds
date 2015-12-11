@@ -108,13 +108,13 @@ public class ArrayList implements List {
 	
 	/**
 	 * Returns true if number of items in array is one less than
-	 * current array size, false otherwise.
+	 * or equal to current array size, false otherwise.
 	 *
 	 * @return true if number of items in array is one less than
-	 * current array size, false otherwise
+	 * or equal to current array size, false otherwise
 	 */
 	public boolean arrayNearFull() {
-		if (numberOfItems == arraySize - 1) {
+		if (arraySize - numberOfItems <= 1) {
 			return true;
 		}
 		return false;
@@ -132,5 +132,33 @@ public class ArrayList implements List {
 		}
 		objectArray = biggerArray;
 		arraySize = arraySize * 2;
+	}
+
+	/**
+	 * Checks that array is currently big enough to accommodate shift,
+	 * then shifts all elements in array one index up, starting from 
+	 * user-provided index.
+	 *
+	 * @param index from which to begin shift
+	 */	
+	public void shiftRight(int index) {
+		if (arrayNearFull()) {
+			doubleArraySize();
+		}
+		for (int i = numberOfItems - 1; i >= index; i--) {
+			objectArray[i + 1] = objectArray[i];
+		}
+	}
+
+	/**
+	 * Shifts all elements in array one index down, starting from 
+	 * user-provided index.
+	 *
+	 * @param index from which to begin shift
+	 */	
+	public void shiftLeft(int index) {
+		for (int i = index; i < numberOfItems; i+) {
+			objectArray[i - 1] = objectArray[i];
+		}
 	}
 }
