@@ -42,6 +42,9 @@ public class ArrayList implements List {
 	 *         encapsulated in a ReturnObject
 	 */
 	public ReturnObject get(int index) {
+		if (isEmpty()) {
+			return new ReturnObjectImpl(ErrorMessage.EMPTY_STRUCTURE);
+		}
 		if (index < 0 || index >= numberOfItems) {
 			return new ReturnObjectImpl(ErrorMessage.INDEX_OUT_OF_BOUNDS);
 		} else {
@@ -49,6 +52,7 @@ public class ArrayList implements List {
 		}
 	}
 
+	@Override
 	/**
 	 * Returns the elements at the given position and removes it
 	 * from the list. The indeces of elements after the removed
@@ -61,8 +65,20 @@ public class ArrayList implements List {
 	 * @return the element or an appropriate error message, 
 	 *         encapsulated in a ReturnObject
 	 */
-	//public ReturnObject remove(int index);
-
+	public ReturnObject remove(int index) {
+		if (isEmpty()) {
+			return new ReturnObjectImpl(ErrorMessage.EMPTY_STRUCTURE);
+		}
+		if (index < 0 || index >= numberOfItems) {
+			return new ReturnObjectImpl(ErrorMessage.INDEX_OUT_OF_BOUNDS);
+		}
+		ReturnObject removedElement = new ReturnObjectImpl(objectArray[index]);
+		shiftLeft(index + 1);
+		numberOfItems--;
+		return removedElement;
+	}
+	
+	@Override
 	/**
 	 * Adds an element to the list, inserting it at the given
 	 * position. The indeces of elements at and after that position
@@ -81,7 +97,18 @@ public class ArrayList implements List {
 	 * @return an ReturnObject, empty if the operation is successful
 	 *         or containing an appropriate error message otherwise
 	 */
-	//public ReturnObject add(int index, Object item);
+	public ReturnObject add(int index, Object item) {
+		if (item == null) {
+			return new ReturnObjectImpl(ErrorMessage.INVALID_ARGUMENT);
+		}
+		if (index < 0 || index >= numberOfItems) {
+			return new ReturnObjectImpl(ErrorMessage.INDEX_OUT_OF_BOUNDS);
+		}
+		shiftRight(index);
+		objectArray[index] = item;
+		numberOfItems++;
+		return new ReturnObjectImpl(null);
+	}
 
 	/**
 	 * Adds an element at the end of the list.
@@ -157,8 +184,9 @@ public class ArrayList implements List {
 	 * @param index from which to begin shift
 	 */	
 	public void shiftLeft(int index) {
-		for (int i = index; i < numberOfItems; i+) {
+		for (int i = index; i < numberOfItems; i++) {
 			objectArray[i - 1] = objectArray[i];
 		}
+		objectArray[numberOfItems - 1] = null;
 	}
 }
