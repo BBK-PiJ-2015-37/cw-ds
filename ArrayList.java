@@ -1,8 +1,8 @@
 public class ArrayList implements List {
-	private Object[] objectArray;
-	private static final int DEFAULT_ARRAY_SIZE = 4;
-	private int arraySize;
-	private int numberOfItems;
+	protected Object[] objectArray;
+	protected static final int DEFAULT_ARRAY_SIZE = 4;
+	protected int arraySize;
+	protected int numberOfItems;
 	
 	public ArrayList() {
 		objectArray = new Object[DEFAULT_ARRAY_SIZE];
@@ -17,7 +17,7 @@ public class ArrayList implements List {
 	 * @return true if the list is empty, false otherwise. 
 	 */
 	public boolean isEmpty() {
-		return (numberOfItems == 0);
+		return (size() == 0);
 	}
 
 	@Override
@@ -44,8 +44,7 @@ public class ArrayList implements List {
 	public ReturnObject get(int index) {
 		if (isEmpty()) {
 			return new ReturnObjectImpl(ErrorMessage.EMPTY_STRUCTURE);
-		}
-		if (index < 0 || index >= numberOfItems) {
+		} else if (index < 0 || index >= size()) {
 			return new ReturnObjectImpl(ErrorMessage.INDEX_OUT_OF_BOUNDS);
 		} else {
 			return new ReturnObjectImpl(objectArray[index]);
@@ -66,9 +65,6 @@ public class ArrayList implements List {
 	 *         encapsulated in a ReturnObject
 	 */
 	public ReturnObject remove(int index) {
-		if (isEmpty()) {
-			return new ReturnObjectImpl(ErrorMessage.EMPTY_STRUCTURE);
-		}
 		if (index < 0 || index >= numberOfItems) {
 			return new ReturnObjectImpl(ErrorMessage.INDEX_OUT_OF_BOUNDS);
 		}
@@ -98,18 +94,19 @@ public class ArrayList implements List {
 	 *         or containing an appropriate error message otherwise
 	 */
 	public ReturnObject add(int index, Object item) {
-		if (item == null) {
-			return new ReturnObjectImpl(ErrorMessage.INVALID_ARGUMENT);
-		}
 		if (index < 0 || index >= numberOfItems) {
 			return new ReturnObjectImpl(ErrorMessage.INDEX_OUT_OF_BOUNDS);
+		}
+		if (item == null) {
+			return new ReturnObjectImpl(ErrorMessage.INVALID_ARGUMENT);
 		}
 		shiftRight(index);
 		objectArray[index] = item;
 		numberOfItems++;
-		return new ReturnObjectImpl(null);
+		return new ReturnObjectImpl(ErrorMessage.NO_ERROR);
 	}
 
+	@Override
 	/**
 	 * Adds an element at the end of the list.
 	 * 
@@ -130,7 +127,7 @@ public class ArrayList implements List {
 		}
 		objectArray[numberOfItems] = item;
 		numberOfItems++;
-		return new ReturnObjectImpl(null);
+		return new ReturnObjectImpl(ErrorMessage.NO_ERROR);
 	}
 	
 	/**
@@ -140,7 +137,7 @@ public class ArrayList implements List {
 	 * @return true if number of items in array is one less than
 	 * or equal to current array size, false otherwise
 	 */
-	public boolean arrayNearFull() {
+	private boolean arrayNearFull() {
 		if (arraySize - numberOfItems <= 1) {
 			return true;
 		}
@@ -152,7 +149,7 @@ public class ArrayList implements List {
 	 * copies all items from current array into new array,
 	 * then switches instance's pointer from current to new array.
 	 */
-	public void doubleArraySize() {
+	private void doubleArraySize() {
 		Object[] biggerArray = new Object[arraySize * 2];
 		for (int i = 0; i < numberOfItems; i++) {
 			biggerArray[i] = objectArray[i];
@@ -168,7 +165,7 @@ public class ArrayList implements List {
 	 *
 	 * @param index from which to begin shift
 	 */	
-	public void shiftRight(int index) {
+	private void shiftRight(int index) {
 		if (arrayNearFull()) {
 			doubleArraySize();
 		}
@@ -183,7 +180,7 @@ public class ArrayList implements List {
 	 *
 	 * @param index from which to begin shift
 	 */	
-	public void shiftLeft(int index) {
+	private void shiftLeft(int index) {
 		for (int i = index; i < numberOfItems; i++) {
 			objectArray[i - 1] = objectArray[i];
 		}
