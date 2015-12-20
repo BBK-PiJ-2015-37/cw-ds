@@ -1,4 +1,4 @@
-public class SampleableListImpl extends FunctionalArrayList implements SampleableList {
+public class SampleableListImpl extends ArrayList implements SampleableList {
 	private SampleableList sampleList;
 	
 	@Override
@@ -9,7 +9,15 @@ public class SampleableListImpl extends FunctionalArrayList implements Sampleabl
 	 * @return a list containing the first, third, fifth... items of this list
 	 */
 	public SampleableList sample() {
-		return null;
+		sampleList = new SampleableListImpl();
+		if (isEmpty()) {
+			return sampleList;
+		} else {
+			for (int i = 0; i < size(); i += 2) {
+				sampleList.add(get(i).getReturnValue());
+			}
+			return sampleList;
+		}
 	}
 	
 }
