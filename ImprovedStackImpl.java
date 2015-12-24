@@ -59,4 +59,24 @@ public class ImprovedStackImpl implements ImprovedStack {
 	public ReturnObject pop() {
 		return basicStack.pop();
 	}
+	
+	@Override
+	/**
+	 * Returns a copy of this stack with the items reversed, the top
+	 * elements on the original stack is at the bottom of the new
+	 * stack and viceversa.
+	 * 
+	 * @return a copy of this stack with the items reversed. 
+	 */
+	public ImprovedStack reverse() {
+		Stack copyOfStack = basicStack;
+		List reversedArray = new ArrayList();
+		while (!copyOfStack.isEmpty()) {
+			ReturnObject itemToAdd = copyOfStack.pop();
+			reversedArray.add(itemToAdd.getReturnValue());
+		}
+		ImprovedStack reversedStack = new ImprovedStackImpl(reversedArray);
+		return reversedStack;
+	}
+	
 }
