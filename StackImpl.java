@@ -46,10 +46,10 @@ public class StackImpl extends AbstractStack {
 	 *         stack is empty, an appropriate error.
 	 */
 	public ReturnObject top() {
-		if (internalList.isEmpty()) {
+		if (isEmpty()) {
 			return new ReturnObjectImpl(ErrorMessage.EMPTY_STRUCTURE);
 		} else {
-			return internalList.get(internalList.size() - 1);
+			return internalList.get(size() - 1);
 		}
 	}
 
@@ -62,6 +62,10 @@ public class StackImpl extends AbstractStack {
 	 *         stack is empty, an appropriate error.
 	 */
 	public ReturnObject pop() {
-		return null;
+		if (isEmpty()) {
+			return new ReturnObjectImpl(ErrorMessage.EMPTY_STRUCTURE);
+		} else {
+			return internalList.remove(size() - 1);	
+		}
 	}
 }
