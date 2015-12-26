@@ -69,13 +69,21 @@ public class ImprovedStackImpl implements ImprovedStack {
 	 * @return a copy of this stack with the items reversed. 
 	 */
 	public ImprovedStack reverse() {
-		Stack copyOfStack = basicStack;
 		List reversedArray = new ArrayList();
-		while (!copyOfStack.isEmpty()) {
-			ReturnObject itemToAdd = copyOfStack.pop();
+		List tempArray = new ArrayList();
+		while (!basicStack.isEmpty()) {
+			ReturnObject itemToAdd = basicStack.pop();
 			reversedArray.add(itemToAdd.getReturnValue());
+			tempArray.add(itemToAdd.getReturnValue());
 		}
 		ImprovedStack reversedStack = new ImprovedStackImpl(reversedArray);
+		Stack tempStack = new StackImpl(tempArray);
+		List originalArray = new ArrayList();
+		while (!tempStack.isEmpty()) {
+			ReturnObject itemToAdd = tempStack.pop();
+			originalArray.add(itemToAdd.getReturnValue());
+		}
+		basicStack = new StackImpl(originalArray);
 		return reversedStack;
 	}
 	
