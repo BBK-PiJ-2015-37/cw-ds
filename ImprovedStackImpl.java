@@ -87,4 +87,34 @@ public class ImprovedStackImpl implements ImprovedStack {
 		return reversedStack;
 	}
 	
+	@Override
+	/**
+	 * Removes the given object from the stack if it is
+	 * there. Multiple instances of the object are all removed.
+	 *
+	 * Classes implementing this method must use method .equals() to
+	 * check whether the item is in the stack or not.
+	 * 
+	 * @param object the object to remove
+	 */
+	public void remove(Object object) {
+		if (!isEmpty()) {
+			List tempArray = new ArrayList();
+			Stack tempStack = new StackImpl(tempArray);
+			while (!basicStack.isEmpty()) {
+				ReturnObject itemToAdd = basicStack.pop();
+				if (itemToAdd.getReturnValue().equals(object)) {
+					continue;
+				} else {
+					tempStack.push(itemToAdd.getReturnValue());
+				}
+			}
+			while (!tempStack.isEmpty()) {
+				ReturnObject itemToAdd = tempStack.pop();
+				basicStack.push(itemToAdd.getReturnValue());
+			}
+		}
+		return;
+	}
+	
 }
