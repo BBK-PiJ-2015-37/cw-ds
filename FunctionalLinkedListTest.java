@@ -113,6 +113,32 @@ public class FunctionalLinkedListTest {
 			testResult = FLLTest.get(i);
 			printTestResult(testResult);
 		}
+		System.out.println("Checking the Functional List functions can be carried out on rest list...");
+		System.out.print("Retrieving head of rest list...");
+		testResult = restList.head();
+		printTestResult(testResult);
+		System.out.println("Retrieving rest of rest list...");
+		FunctionalList restList2 = restList.rest();
+		for (int i = 0; i < restList2.size(); i++) {
+			System.out.print("Retrieving element at index " + i + " from rest list 2...");
+			testResult = restList2.get(i);
+			printTestResult(testResult);
+		}
+		System.out.print("Adding 50,000 items to rest list 2...");
+		for (int i = 0; i < 50000; i++) {
+			testResult = restList2.add(i);
+		}
+		System.out.println("done");
+		System.out.println("Number of items in rest list: " + restList.size());
+		System.out.println("Number of items in rest list 2: " + restList2.size());
+		System.out.println("Removing 10000 random elements from rest list 2...");
+		for (int i = 0; i < 10000; i++) {
+			int randInt = (int)(Math.random() * (restList2.size() + 1));
+			testResult = restList2.remove(randInt);
+			printTestResult(testResult);
+		}
+		System.out.println("Number of items in rest list 2: " + restList2.size());
+		System.out.println("Number of items in rest list: " + restList.size());
 	}
 
 	public void printTestResult(ReturnObject result) {
