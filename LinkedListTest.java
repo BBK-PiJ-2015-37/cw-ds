@@ -61,6 +61,19 @@ public class LinkedListTest {
 			printTestResult(testResult);		
 		}
 		System.out.println("Is the list empty?: " + linkedListTest.isEmpty());
+		System.out.print("Adding 50000 items...");
+		for (int i = 0; i < 50000; i++) {
+			testResult = linkedListTest.add(i);
+		}
+		System.out.println("done");
+		System.out.println("Number of items in list: " + linkedListTest.size());
+		System.out.println("Removing 10000 random elements from list...");
+		for (int i = 0; i < 10000; i++) {
+			int randInt = (int)(Math.random() * (linkedListTest.size() + 1));
+			testResult = linkedListTest.remove(randInt);
+			printTestResult(testResult);
+		}
+		System.out.println("Number of items in list: " + linkedListTest.size());
 	}
 
 	public void printTestResult(ReturnObject result) {
