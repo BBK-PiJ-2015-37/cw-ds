@@ -85,6 +85,28 @@ public class SampleableListImplTest {
 			testResult = sampleList.get(i);
 			printTestResult(testResult);
 		}
+		System.out.print("Adding 1 million elements to sample list...");
+		for (int i = 0; i < 1000000; i++) {
+			sampleList.add("New element " + i);
+		}
+		System.out.println("done");
+		System.out.println("Sampling sample list...");
+		sampleList = sampleList.sample();
+		System.out.println("Is the sample list empty?: " + sampleList.isEmpty());
+		System.out.println("Number of items in sample list: " + sampleList.size());
+		for (int i = 0; i < 10; i++) {
+			int randInt = (int)(Math.random() * (sampleList.size() + 1));
+			System.out.print("Retrieving element at index " + randInt + " from sample list...");
+			testResult = sampleList.get(randInt);
+			printTestResult(testResult);
+		}
+		System.out.print("Removing 10000 random elements from sample list...");
+		for (int i = 0; i < 10000; i++) {
+			int randInt = (int)(Math.random() * (sampleList.size() + 1));
+			sampleList.remove(randInt);
+		}
+		System.out.println("done");
+		System.out.println("Number of items in sample list: " + sampleList.size());
 	}
 
 	public void printTestResult(ReturnObject result) {
