@@ -7,9 +7,7 @@ public class ImprovedStackImpl implements ImprovedStack {
 
 	@Override
 	/**
-	 * Returns true if the stack is empty, false otherwise. 
-	 * 
-	 * @return true if the stack is empty, false otherwise. 
+	 * {@see Stack}
 	 */
 	public boolean isEmpty() {
 		return basicStack.isEmpty();
@@ -17,9 +15,7 @@ public class ImprovedStackImpl implements ImprovedStack {
 
 	@Override
 	/**
-	 * Returns the number of items currently in the stack.
-	 * 
-	 * @return the number of items currently in the stack
+	 * {@see Stack}
 	 */
 	public int size() {
 		return basicStack.size();
@@ -27,9 +23,7 @@ public class ImprovedStackImpl implements ImprovedStack {
 
 	@Override
 	/**
-	 * Adds an element at the top of the stack. 
-	 * 
-	 * @param item the new item to be added
+	 * {@see Stack}
 	 */
 	public void push(Object item) {
 		basicStack.push(item);
@@ -38,11 +32,7 @@ public class ImprovedStackImpl implements ImprovedStack {
 
 	@Override
 	/**
-	 * Returns the element at the top of the stack. The stack is
-	 * left unchanged.
-	 * 
-	 * @return If stack is not empty, the item on the top is returned. If the
-	 *         stack is empty, an appropriate error.
+	 * {@see Stack}
 	 */
 	public ReturnObject top() {
 		return basicStack.top();
@@ -50,11 +40,7 @@ public class ImprovedStackImpl implements ImprovedStack {
 
 	@Override
 	/**
-	 * Returns the element at the top of the stack. The element is
-	 * removed frmo the stack.
-	 * 
-	 * @return If stack is not empty, the item on the top is returned. If the
-	 *         stack is empty, an appropriate error.
+	 * {@see Stack}
 	 */
 	public ReturnObject pop() {
 		return basicStack.pop();
@@ -62,11 +48,7 @@ public class ImprovedStackImpl implements ImprovedStack {
 	
 	@Override
 	/**
-	 * Returns a copy of this stack with the items reversed, the top
-	 * elements on the original stack is at the bottom of the new
-	 * stack and viceversa.
-	 * 
-	 * @return a copy of this stack with the items reversed. 
+	 * {@see ImprovedStack} 
 	 */
 	public ImprovedStack reverse() {
 		List reversedArray = new ArrayList();
@@ -89,13 +71,7 @@ public class ImprovedStackImpl implements ImprovedStack {
 	
 	@Override
 	/**
-	 * Removes the given object from the stack if it is
-	 * there. Multiple instances of the object are all removed.
-	 *
-	 * Classes implementing this method must use method .equals() to
-	 * check whether the item is in the stack or not.
-	 * 
-	 * @param object the object to remove
+	 * {@see ImprovedStack} 
 	 */
 	public void remove(Object object) {
 		if (!isEmpty()) {
