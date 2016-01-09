@@ -1,6 +1,17 @@
 public class ImprovedStackImpl implements ImprovedStack {
 	private Stack basicStack;
 	
+	/**
+     * Creates a new stack using the provided list as the
+     * underlying data structure.
+     * 
+     * Note: This constructor does not check whether the provided list
+     * is null. Programmers must do their own checks. If a null list
+     * is provided, a NullPointerException will be thrown at runtime
+     * as soon as any operation is attempted on the underlying list.
+     * 
+     * @param list the list to be used 
+     */
 	public ImprovedStackImpl(List list) {
 		basicStack = new StackImpl(list);
 	}
