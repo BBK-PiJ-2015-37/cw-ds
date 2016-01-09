@@ -30,7 +30,7 @@ public class LinkedList implements List {
 	public ReturnObject get(int index) {
 		if (isEmpty()) {
 			return new ReturnObjectImpl(ErrorMessage.EMPTY_STRUCTURE);
-		} else if (index < 0 || index >= numberOfItems) {
+		} else if (index < 0 || index >= size()) {
 			return new ReturnObjectImpl(ErrorMessage.INDEX_OUT_OF_BOUNDS);
 		}
 		int currentIndex = 0;
@@ -47,7 +47,7 @@ public class LinkedList implements List {
 	 * {@see List}
 	 */
 	public ReturnObject remove(int index) {
-		if (index < 0 || index >= numberOfItems) {
+		if (index < 0 || index >= size()) {
 			return new ReturnObjectImpl(ErrorMessage.INDEX_OUT_OF_BOUNDS);
 		}
 		ReturnObject removedElement;
@@ -92,7 +92,7 @@ public class LinkedList implements List {
 	 * {@see List}
 	 */
 	public ReturnObject add(int index, Object item) {
-		if (index < 0 || index >= numberOfItems) {
+		if (index < 0 || index >= size()) {
 			return new ReturnObjectImpl(ErrorMessage.INDEX_OUT_OF_BOUNDS);
 		}
 		if (item == null) {

@@ -45,7 +45,7 @@ public class ArrayList implements List {
 	 * {@see List}
 	 */
 	public ReturnObject remove(int index) {
-		if (index < 0 || index >= numberOfItems) {
+		if (index < 0 || index >= size()) {
 			return new ReturnObjectImpl(ErrorMessage.INDEX_OUT_OF_BOUNDS);
 		}
 		ReturnObject removedElement = new ReturnObjectImpl(objectArray[index]);
@@ -59,7 +59,7 @@ public class ArrayList implements List {
 	 * {@see List}
 	 */
 	public ReturnObject add(int index, Object item) {
-		if (index < 0 || index >= numberOfItems) {
+		if (index < 0 || index >= size()) {
 			return new ReturnObjectImpl(ErrorMessage.INDEX_OUT_OF_BOUNDS);
 		}
 		if (item == null) {
@@ -95,7 +95,7 @@ public class ArrayList implements List {
 	 * or equal to current array size, false otherwise
 	 */
 	private boolean arrayNearFull() {
-		if (arraySize - numberOfItems <= 1) {
+		if (arraySize - size() <= 1) {
 			return true;
 		}
 		return false;
@@ -108,7 +108,7 @@ public class ArrayList implements List {
 	 */
 	private void doubleArraySize() {
 		Object[] biggerArray = new Object[arraySize * 2];
-		for (int i = 0; i < numberOfItems; i++) {
+		for (int i = 0; i < size(); i++) {
 			biggerArray[i] = objectArray[i];
 		}
 		objectArray = biggerArray;
@@ -126,7 +126,7 @@ public class ArrayList implements List {
 		if (arrayNearFull()) {
 			doubleArraySize();
 		}
-		for (int i = numberOfItems - 1; i >= index; i--) {
+		for (int i = size() - 1; i >= index; i--) {
 			objectArray[i + 1] = objectArray[i];
 		}
 	}
@@ -138,9 +138,9 @@ public class ArrayList implements List {
 	 * @param index from which to begin shift
 	 */	
 	private void shiftLeft(int index) {
-		for (int i = index; i < numberOfItems; i++) {
+		for (int i = index; i < size(); i++) {
 			objectArray[i - 1] = objectArray[i];
 		}
-		objectArray[numberOfItems - 1] = null;
+		objectArray[size() - 1] = null;
 	}
 }
