@@ -64,6 +64,7 @@ public class ImprovedStackImpl implements ImprovedStack {
 	public ImprovedStack reverse() {
 		List reversedArray = new ArrayList();
 		List tempArray = new ArrayList();
+		//fill reversed and temporary stacks with original stack's content
 		while (!basicStack.isEmpty()) {
 			ReturnObject itemToAdd = basicStack.pop();
 			reversedArray.add(itemToAdd.getReturnValue());
@@ -71,6 +72,7 @@ public class ImprovedStackImpl implements ImprovedStack {
 		}
 		ImprovedStack reversedStack = new ImprovedStackImpl(reversedArray);
 		Stack tempStack = new StackImpl(tempArray);
+		//repopulate original stack with temporary stack's content
 		List originalArray = new ArrayList();
 		while (!tempStack.isEmpty()) {
 			ReturnObject itemToAdd = tempStack.pop();
@@ -88,6 +90,8 @@ public class ImprovedStackImpl implements ImprovedStack {
 		if (!isEmpty()) {
 			List tempArray = new ArrayList();
 			Stack tempStack = new StackImpl(tempArray);
+			//fill temporary stack with original stack items
+			//if they are not item to be removed
 			while (!basicStack.isEmpty()) {
 				ReturnObject itemToAdd = basicStack.pop();
 				if (itemToAdd.getReturnValue().equals(object)) {
@@ -96,6 +100,7 @@ public class ImprovedStackImpl implements ImprovedStack {
 					tempStack.push(itemToAdd.getReturnValue());
 				}
 			}
+			//repopulate original stack with temporary stack's content
 			while (!tempStack.isEmpty()) {
 				ReturnObject itemToAdd = tempStack.pop();
 				basicStack.push(itemToAdd.getReturnValue());
