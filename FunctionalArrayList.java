@@ -18,13 +18,11 @@ public class FunctionalArrayList extends ArrayList implements FunctionalList {
      */
     public FunctionalList rest() {
 		FunctionalList rest = new FunctionalArrayList();
-		if (isEmpty()) {
-			return rest;
-		} else {
+		if (!isEmpty()) {
 			for (int i = 0; i < numberOfItems - 1; i++) {
 				rest.add(this.objectArray[i + 1]);
 			}
-			return rest;
 		}
+		return rest;
 	}
 }

@@ -18,16 +18,14 @@ public class FunctionalLinkedList extends LinkedList implements FunctionalList {
      */
     public FunctionalList rest() {
 		FunctionalList rest = new FunctionalLinkedList();
-		if (isEmpty()) {
-			return rest;
-		} else {
+		if (!isEmpty()) {
 			ListNode current = head.getNext();
 			rest.add(current.getValue());
 			while (current.getNext() != null) {
 				current = current.getNext();
 				rest.add(current.getValue());
 			}
-			return rest;
 		}
+		return rest;
 	}
 }
